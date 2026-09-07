@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hakeem Abiola — EV Infrastructure Project Manager</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --bg: #10151b;
+    --surface: #161d24;
+    --surface-2: #1c242c;
+    --line: #2a333d;
+    --line-soft: #202832;
+    --text: #edf1f4;
+    --muted: #93a2ad;
+    --accent: #e2803f;
+    --accent-soft: rgba(226,128,63,0.14);
+    --accent-line: rgba(226,128,63,0.45);
+    --max: 880px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection{ background: var(--accent-soft); color: var(--text); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  a{ color: var(--accent); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* Faint blueprint grid on the page background */
+  .grid-field{
+    position: fixed; inset: 0; z-index: -1;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.35;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+  }
+
+  header.top{
+    padding: 56px 0 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .top-inner{ padding-bottom: 28px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:16px; }
+  .name{ font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin:0; letter-spacing: -0.01em; }
+  .role{ color: var(--muted); font-size: 16px; margin-top: 6px; }
+  .contact{ font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--muted); text-align: right; line-height: 1.8; }
+  .contact a{ color: var(--muted); }
+  .contact a:hover{ color: var(--accent); }
+
+  section{ padding: 56px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type{ border-bottom: none; }
+
+  h2{
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    margin: 0 0 24px;
+    display:flex; align-items:center; gap:10px;
+  }
+  h2::before{ content:''; width:6px; height:6px; background: var(--accent); display:inline-block; }
+
+  h3{ font-size: 19px; margin: 0 0 4px; font-weight:600; }
+
+  p{ margin: 0 0 14px; color: var(--text); }
+  p.lede{ font-size: 17px; max-width: 62ch; color: var(--text); }
+  .muted{ color: var(--muted); }
+
+  /* Hero pipeline schematic */
+  .hero{ padding-top: 44px; }
+  .pipeline{ margin: 36px 0 8px; }
+  .pipeline svg{ width: 100%; height: auto; display:block; }
+  .pipeline-caption{ font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 10px; }
+
+  .node-label{ font-family:'IBM Plex Mono', monospace; font-size: 11px; fill: var(--muted); }
+  .node-dot{ fill: var(--bg); stroke: var(--accent); stroke-width: 2; }
+  .node-dot.filled{ fill: var(--accent); }
+  .flow-line{
+    stroke: var(--accent);
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 620;
+    stroke-dashoffset: 620;
+    animation: draw 1.8s ease forwards 0.3s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset: 0; } }
+
+  /* two-column list */
+  .flist{ columns: 2; column-gap: 40px; }
+  .flist div{ break-inside: avoid; display:flex; gap:10px; padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 14.5px; }
+  .flist div:before{ content:'—'; color: var(--accent); flex-shrink:0; }
+  @media (max-width: 640px){ .flist{ columns:1; } }
+
+  /* toolkit */
+  .toolkit-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap: 28px 40px; }
+  @media (max-width: 640px){ .toolkit-grid{ grid-template-columns: 1fr; } }
+  .toolkit-cat{ font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 8px; }
+  .toolkit-items{ color: var(--muted); font-size: 14.5px; }
+
+  /* projects */
+  .project{ margin-bottom: 44px; }
+  .project:last-child{ margin-bottom: 0; }
+  .project-meta{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .project-index{ color: var(--accent); }
+  .project ul{ margin: 12px 0 16px; padding-left: 18px; }
+  .project li{ margin-bottom: 7px; font-size: 14.5px; }
+  .deliverables{ display:flex; flex-wrap:wrap; gap:8px; margin-top: 10px; }
+  .deliverables span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 4px 9px;
+  }
+
+  /* framework steps */
+  .steps{ counter-reset: step; }
+  .step{ display:flex; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
+  .step:last-child{ border-bottom: 1px solid var(--line); }
+  .step::before{
+    counter-increment: step;
+    content: counter(step, decimal-leading-zero);
+    font-family:'IBM Plex Mono', monospace;
+    color: var(--accent);
+    font-size: 13px;
+    flex-shrink:0;
+    width: 28px;
+    padding-top: 1px;
+  }
+  .step p{ margin:0; font-size: 14.5px; }
+
+  /* controls table */
+  table{ width:100%; border-collapse: collapse; font-size: 14px; }
+  th{ text-align:left; font-family:'IBM Plex Mono', monospace; font-weight:500; font-size: 11px; color: var(--accent); padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  td{ padding: 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; color: var(--text); }
+  tr td:first-child{ color: var(--text); font-weight: 500; white-space: nowrap; }
+  tr td:last-child{ color: var(--muted); font-family:'IBM Plex Mono', monospace; font-size: 12.5px; }
+  .table-scroll{ overflow-x:auto; }
+
+  /* competencies */
+  .tags{ display:flex; flex-wrap:wrap; gap: 10px; }
+  .tags span{ font-size: 13px; padding: 7px 12px; border: 1px solid var(--line); color: var(--text); }
+  .tags span:hover{ border-color: var(--accent-line); color: var(--accent); }
+
+  footer{ padding: 44px 0 64px; }
+  footer .contact-line{ font-family:'IBM Plex Mono', monospace; font-size: 13px; color: var(--muted); }
+  footer .contact-line a{ color: var(--text); }
+
+  @media (max-width: 640px){
+    .top-inner{ flex-direction:column; align-items:flex-start; }
+    .contact{ text-align:left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-field"></div>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <div>
+      <p class="name">Hakeem Abiola</p>
+      <p class="role">EV Infrastructure Project Manager — Delivery, Procurement &amp; Technical Coordination</p>
+    </div>
+    <div class="contact">
+      20 Hon Ajayi Alaba St, Lekki<br>
+      <a href="tel:+2348053281280">0805 328 1280</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <p class="lede">I manage EV infrastructure projects end to end — turning procurement, site readiness, contractors and schedules into a single line of delivery from planning to handover.</p>
+
+  <div class="pipeline">
+    <svg viewBox="0 0 760 120" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Delivery pipeline: Plan, Procure, Install, Commission, Handover">
+      <path class="flow-line" d="M 40 60 L 720 60"></path>
+      <g>
+        <circle class="node-dot filled" cx="40" cy="60" r="7"></circle>
+        <text class="node-label" x="40" y="90" text-anchor="middle">PLAN</text>
+
+        <circle class="node-dot filled" cx="210" cy="60" r="7"></circle>
+        <text class="node-label" x="210" y="90" text-anchor="middle">PROCURE</text>
+
+        <circle class="node-dot filled" cx="380" cy="60" r="7"></circle>
+        <text class="node-label" x="380" y="90" text-anchor="middle">INSTALL</text>
+
+        <circle class="node-dot filled" cx="550" cy="60" r="7"></circle>
+        <text class="node-label" x="550" y="90" text-anchor="middle">COMMISSION</text>
+
+        <circle class="node-dot filled" cx="720" cy="60" r="7"></circle>
+        <text class="node-label" x="720" y="90" text-anchor="middle">HANDOVER</text>
+      </g>
+    </svg>
+    <p class="pipeline-caption">Scope of coordination across a typical EV infrastructure delivery cycle</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Profile</h2>
+  <p>Project and operations professional focused on infrastructure delivery, technical coordination, procurement, scheduling, vendor management, inventory, cost tracking, risk management, and cross-functional execution. Experience across engineering, manufacturing, and operational environments provides a practical foundation for managing EV infrastructure projects from planning and procurement through execution, monitoring, commissioning support, and handover.</p>
+</section>
+
+<section class="wrap">
+  <h2>EV infrastructure focus</h2>
+  <div class="flist">
+    <div>EV charging infrastructure planning and deployment coordination</div>
+    <div>Site and implementation readiness tracking</div>
+    <div>Procurement, supplier, and contractor coordination</div>
+    <div>Project schedules, milestones, and progress reporting</div>
+    <div>Material and equipment availability / inventory coordination</div>
+    <div>Cost tracking, budget monitoring, and change control</div>
+    <div>Risk, issue and dependency management</div>
+    <div>Stakeholder communication across technical and business teams</div>
+    <div>Power BI / Excel reporting and project dashboards</div>
+    <div>Microsoft Project and Primavera P6 scheduling</div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Toolkit</h2>
+  <div class="toolkit-grid">
+    <div>
+      <div class="toolkit-cat">PLANNING &amp; SCHEDULING</div>
+      <div class="toolkit-items">Microsoft Project · Primavera P6</div>
+    </div>
+    <div>
+      <div class="toolkit-cat">REPORTING &amp; ANALYTICS</div>
+      <div class="toolkit-items">Microsoft Excel · Power BI · KPI dashboards</div>
+    </div>
+    <div>
+      <div class="toolkit-cat">DELIVERY</div>
+      <div class="toolkit-items">Procurement · Vendor management · Inventory · Logistics · Cost tracking · Risk management</div>
+    </div>
+    <div>
+      <div class="toolkit-cat">COLLABORATION</div>
+      <div class="toolkit-items">Engineering · Procurement · Operations · Contractors · Suppliers · Technical stakeholders</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Experience</h2>
+
+  <div class="project">
+    <div class="project-meta"><span class="project-index">01</span> · HSAGP · EV / Battery Infrastructure Project Support</div>
+    <h3>Project Management / Operations Support</h3>
+    <p class="muted">EV and advanced manufacturing infrastructure</p>
+    <p>Supported the coordination of EV-related infrastructure and manufacturing activities by aligning project schedules, materials, procurement, vendors, operational requirements, and stakeholders.</p>
+    <ul>
+      <li>Supported coordination between engineering, procurement, operations, suppliers, and project stakeholders.</li>
+      <li>Tracked project activities, milestones, dependencies, and operational requirements to support timely execution.</li>
+      <li>Supported procurement and supplier coordination for materials, equipment, and project requirements.</li>
+      <li>Monitored material availability and inventory requirements to reduce the risk of project delays.</li>
+      <li>Supported KPI reporting and management visibility through Excel / Power BI reporting.</li>
+      <li>Assisted with issue identification, escalation, and follow-up across cross-functional teams.</li>
+      <li>Supported continuous-improvement activities focused on operational efficiency and execution discipline.</li>
+    </ul>
+    <div class="deliverables">
+      <span>Schedule / milestone tracker</span>
+      <span>Procurement &amp; material-readiness tracker</span>
+      <span>Vendor / supplier action log</span>
+      <span>Risk &amp; issue register</span>
+      <span>Weekly status reporting</span>
+      <span>KPI dashboard</span>
+      <span>Stakeholder action tracker</span>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-meta"><span class="project-index">02</span> · HSAGP · EV Infrastructure Readiness &amp; Coordination</div>
+    <h3>Infrastructure readiness, materials, coordination and operational execution</h3>
+    <p>Applied a structured project-management framework to EV infrastructure workstreams, from scope definition through closeout.</p>
+    <ul>
+      <li>Charging equipment procurement and supplier coordination</li>
+      <li>Site readiness and installation coordination</li>
+      <li>Electrical / civil work dependency tracking</li>
+      <li>Equipment delivery and logistics coordination</li>
+      <li>Contractor schedule and performance monitoring</li>
+      <li>Testing, commissioning, and punch-list tracking</li>
+      <li>Operations handover and project closeout</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <div class="project-meta"><span class="project-index">03</span> · Dexian · Technical Project &amp; Workforce Coordination</div>
+    <h3>Technical / infrastructure project coordination</h3>
+    <p>Applied project-management and operations capabilities in a technical environment, supporting coordination, stakeholder communication, work tracking, documentation, and delivery activities — strengthening the ability to operate between technical teams, project leadership and business stakeholders.</p>
+    <ul>
+      <li>Coordinating activities across multiple stakeholders and work streams</li>
+      <li>Tracking tasks, deadlines, dependencies, and outstanding actions</li>
+      <li>Maintaining project documentation and status information</li>
+      <li>Supporting communication between technical and non-technical stakeholders</li>
+      <li>Finding operational blockers and escalating issues appropriately</li>
+      <li>Using structured reporting to improve visibility into project progress</li>
+      <li>Supporting delivery against schedule and operational requirements</li>
+    </ul>
+    <p class="muted">Why this transfers to EV infrastructure: EV projects require project managers who can connect engineering requirements with procurement, contractors, suppliers, schedules, planning, budgets, and operational readiness — this cross-functional foundation supports an integrated approach to EV infrastructure delivery.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Project management framework</h2>
+  <div class="steps">
+    <div class="step"><p>Define scope, deliverables, and project success criteria.</p></div>
+    <div class="step"><p>Break work into milestones, dependencies, and accountable owners.</p></div>
+    <div class="step"><p>Track procurement lead times and material readiness against the project schedule.</p></div>
+    <div class="step"><p>Maintain risks, issues, decisions, and action items in a centralised tracker.</p></div>
+    <div class="step"><p>Coordinate technical and operational stakeholders around blockers.</p></div>
+    <div class="step"><p>Report progress using KPIs, schedule status and exception reporting.</p></div>
+    <div class="step"><p>Escalate critical schedule, cost, quality, or supply risks early.</p></div>
+    <div class="step"><p>Support closeout by confirming outstanding actions, documentation, and handover requirements.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Representative project controls</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Control</th><th>Purpose</th><th>Typical output</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Schedule control</td><td>Track milestones, dependencies and critical activities</td><td>MS Project / Primavera P6 schedule</td></tr>
+        <tr><td>Procurement control</td><td>Track long-lead equipment and supplier actions</td><td>Procurement tracker / expediting log</td></tr>
+        <tr><td>Risk management</td><td>Identify and mitigate delivery risks</td><td>Risk &amp; issue register</td></tr>
+        <tr><td>Cost control</td><td>Monitor budget exposure and changes</td><td>Cost tracker / variance report</td></tr>
+        <tr><td>Performance</td><td>Provide management visibility</td><td>KPI dashboard / weekly report</td></tr>
+        <tr><td>Stakeholder management</td><td>Keep owners aligned on actions</td><td>Action / decision log</td></tr>
+        <tr><td>Quality &amp; closeout</td><td>Track completion and handover</td><td>Punch list / closeout tracker</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Value proposition</h2>
+  <p class="lede">I bring project management, operations, procurement, logistics, analytics and technical coordination together — supporting EV infrastructure projects across the full delivery lifecycle, from planning and procurement through installation coordination, monitoring, issue resolution, commissioning support and handover.</p>
+  <div class="tags">
+    <span>Project planning &amp; scheduling</span>
+    <span>EV infrastructure coordination</span>
+    <span>Procurement &amp; supplier management</span>
+    <span>Contractor coordination</span>
+    <span>Risk &amp; issue management</span>
+    <span>Cost &amp; budget tracking</span>
+    <span>Inventory &amp; logistics</span>
+    <span>KPI / progress reporting</span>
+    <span>Stakeholder management</span>
+    <span>Process improvement</span>
+    <span>Microsoft Project</span>
+    <span>Primavera P6</span>
+    <span>Power BI</span>
+    <span>Microsoft Excel</span>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p class="contact-line">Hakeem Abiola — 20 Hon Ajayi Alaba St, Lekki — <a href="tel:+2348053281280">0805 328 1280</a></p>
+</footer>
+
+</body>
+</html>
